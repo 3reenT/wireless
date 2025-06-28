@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem 2 - Spectrum Efficiency</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafe;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #e67e22;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: #2c3e50;
+        }
+
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #e67e22;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #d35400;
+        }
+
+        pre {
+            background-color: #fdf2e9;
+            padding: 15px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            border-left: 5px solid #e67e22;
+        }
+
+        .back-link {
+            margin-top: 30px;
+            display: block;
+            text-align: center;
+            color: #e67e22;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        ul li strong {
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Problem 2 - Spectrum Efficiency</h1>
+
+    <form method="POST">
+        <label>Number of Subcarriers:</label>
+        <input type="number" name="n_sub" required>
+
+        <label>Subcarrier Spacing (kHz):</label>
+        <input type="number" name="spacing" step="any" required>
+
+        <label>Bits per Symbol:</label>
+        <input type="number" name="bps" required>
+
+        <label>Symbols per Slot:</label>
+        <input type="number" name="sym_slot" required>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+        <h2>Results:</h2>
+        <ul>
+            <li><strong>Bits per Resource Element:</strong> {{ result.bits_re }}</li>
+            <li><strong>Bits per OFDM Symbol:</strong> {{ result.bits_sym }}</li>
+            <li><strong>Bits per Resource Block:</strong> {{ result.bits_rb }}</li>
+            <li><strong>Spectral Efficiency:</strong> {{ result.spectral_eff }} b/Hz</li>
+        </ul>
+
+        <h3>Step-by-Step Explanation:</h3>
+        <pre>{{ result.explanation }}</pre>
+
+        <h3>AI Explanation:</h3>
+        <pre>{{ result.llm_explanation }}</pre>
+    {% endif %}
+
+    {% if error %}
+        <p style="color:red;"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    <a class="back-link" href="/">← Back to Home</a>
+</div>
+</body>
+</html>

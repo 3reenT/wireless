@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem 1 - Wireless System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafe;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: #2c3e50;
+        }
+
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        pre {
+            background-color: #eef2f7;
+            padding: 15px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            border-left: 5px solid #3498db;
+        }
+
+        .back-link {
+            margin-top: 30px;
+            display: block;
+            text-align: center;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        ul li strong {
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Problem 1 - Wireless System Bitrate Calculation</h1>
+
+    <form method="POST">
+        <label>Bandwidth (kHz):</label>
+        <input type="number" name="bandwidth" step="any" required>
+
+        <label>Quantizer Bits:</label>
+        <input type="number" name="quantizer_bits" required>
+
+        <label>Source Encoder Rate (Rs):</label>
+        <input type="number" name="source_rate" step="any" required>
+
+        <label>Channel Encoder Rate (Rc):</label>
+        <input type="number" name="channel_rate" step="any" required>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+        <h2>Results:</h2>
+        <ul>
+            <li><strong>Sampling Frequency:</strong> {{ result.fs }} kHz</li>
+            <li><strong>Quantizer Levels:</strong> {{ result.quantizer_levels }}</li>
+            <li><strong>Quantizer Output Bitrate:</strong> {{ result.quantizer_out }} kbps</li>
+            <li><strong>Source Encoder Output Bitrate:</strong> {{ result.source_out }} kbps</li>
+            <li><strong>Channel Encoder Output Bitrate:</strong> {{ result.channel_out }} kbps</li>
+            <li><strong>Interleaver Output Bitrate:</strong> {{ result.interleaver_out }} kbps</li>
+        </ul>
+
+        <h3>Step-by-Step Explanation:</h3>
+        <pre>{{ result.explanation }}</pre>
+
+        <h3>AI Explanation:</h3>
+        <pre>{{ result.llm_explanation }}</pre>
+    {% endif %}
+
+    {% if error %}
+        <p style="color:red;"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    <a class="back-link" href="/">← Back to Home</a>
+</div>
+</body>
+</html>
